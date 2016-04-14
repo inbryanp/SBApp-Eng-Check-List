@@ -17,7 +17,7 @@
     Private Const LOGON32_PROVIDER_DEFAULT = 0
 
     Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click
-
+        'Search for names available'
         If Login(UsernameTextBox.Text, PasswordTextBox.Text) = True Then
             Select Case (UsernameTextBox.Text).ToUpper
                 Case "BRYAN", "COEL", "ADAM.YARED", "LAWRENCE", "ANGEL", "TREVOR", "TREVOR", "JOHNNIE", "RICH"

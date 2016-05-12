@@ -103,23 +103,28 @@ Public Class frmMain
             dt.Columns(5).ColumnName = "FBOM Date"
             dt.Columns(6).ColumnName = "Loc"
 
-            For i = 0 To dt.Rows.Count - 1
-                dt.Rows(i).Item(2) = Replace(dt.Rows(i).Item(2), "Model: ", "")
-                Dim str() As String
-                str = Split(DateTime.ParseExact(dt.Rows(i).Item(4), "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None), " ")
-                dt.Rows(i).Item(4) = str(0)
+            Try
+                For i = 0 To dt.Rows.Count - 1
+                    dt.Rows(i).Item(2) = Replace(dt.Rows(i).Item(2), "Model: ", "")
+                    Dim str() As String
+                    str = Split(DateTime.ParseExact(dt.Rows(i).Item(4), "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None), " ")
+                    dt.Rows(i).Item(4) = str(0)
 
-                Dim str1() As String
-                str1 = Split(DateTime.ParseExact(dt.Rows(i).Item(5) - 2, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None), " ")
-                dt.Rows(i).Item(5) = str1(0)
+                    Dim str1() As String
+                    str1 = Split(DateTime.ParseExact(dt.Rows(i).Item(5) - 2, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None), " ")
+                    dt.Rows(i).Item(5) = str1(0)
 
-                Select Case dt.Rows(i).Item(6)
-                    Case "MI"
+                    Select Case dt.Rows(i).Item(6)
+                        Case "MI"
 
-                    Case Else
-                        dt.Rows(i).Item(6) = "LV"
-                End Select
-            Next
+                        Case Else
+                            dt.Rows(i).Item(6) = "LV"
+                    End Select
+                Next
+            Catch ex As Exception
+
+            End Try
+            
 
             dgvTaskList.DataSource = dt
             dgvTaskList.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
